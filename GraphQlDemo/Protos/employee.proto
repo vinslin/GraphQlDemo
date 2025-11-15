@@ -1,0 +1,54 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GraphQlDemo.Grpc";
+
+package employee;
+
+service EmployeeService {
+
+	rpc GetEmployee (EmployeeRequest) returns (EmployeeResponse);
+
+	rpc GetAllEmployees (Empty) returns (EmployeeListResponse);
+
+	rpc CreateEmployee (CreateEmployeeRequest) returns (EmployeeResponse);
+
+	rpc UpdateEmployee (UpdateEmployeeRequest) returns (EmployeeResponse);
+
+	rpc DeleteEmployee (EmployeeRequest) returns (DeleteResponse);
+
+}
+
+message Empty {}
+
+message EmployeeRequest {
+	string id=1;
+}
+
+message CreateEmployeeRequest{
+		string name=1;
+		string email=2;
+		double salary=3;
+}
+
+message UpdateEmployeeRequest{
+		string id=1;
+		string name=2;
+		string email=3;
+		double salary=4;
+}
+
+message EmployeeResponse{
+		string id=1;
+		string name=2;
+		string email=3;
+		double salary=4;
+}
+
+message EmployeeListResponse{
+		repeated EmployeeResponse employees=1;
+}
+
+message DeleteResponse{
+		bool isDeleted =1;
+		string message =2;
+}
